@@ -1,0 +1,57 @@
+<html>
+	<body>
+		<div id="app"></div>
+	</body>
+	
+	
+	<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+	<!--babel, to transform jsx to javascript-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	
+	<script type="text/jsx">	
+		const app = document.getElementById('app');
+		
+		function Header({title}){
+			return <h1>{createTitle({title})}</h1>;
+			//return <h1>{title ? title : 'no title passed'}</h1>;
+			//return <h1>{`This is the new title you have passed "${title}".`}</h1>;
+		}
+		
+		function createTitle({title}){
+			if(title){
+				return title;
+			}else{
+				return "Default title";
+			}
+		}
+		
+		
+		
+		function HomePage(){
+			const names = ['Alcidio', 'Benedito', 'Carlos', 'David','Edilson', 'Fortunato'];
+			const [likes, setLikes] = React.useState(0);
+			
+			function handleClick(){
+				setLikes(likes+1)
+				console.log('increment like count');
+			}
+		
+			return (<div>
+				{/*Nested components.*/}
+					<Header title="React 💙"/>
+					<Header title="React Lover 💙"/>
+					<Header title="React Forever 💙"/>
+				
+					<ul>
+						{names.map((name)=>(<li key={name}>{name}</li>))}
+					</ul>
+					
+					<button onClick={handleClick}>Like({likes})</button>
+				</div>);
+		}
+		
+		ReactDOM.render(<HomePage/>, app);
+		
+	</script>
+</html>
